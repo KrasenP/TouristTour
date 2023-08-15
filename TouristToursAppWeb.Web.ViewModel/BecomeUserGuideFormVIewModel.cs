@@ -21,11 +21,11 @@ namespace TouristToursAppWeb.Web.ViewModel
 
         [MaxLength(VATNumberMaxLength)]
         [MinLength(VATNumberMinLength)]
-        public string ValueAddedTaxIdentificationNumber { get; set; }
+        public string? ValueAddedTaxIdentificationNumber { get; set; }
 
         [MaxLength(CRNLenghtMax)]
         [MinLength(CRNLenghtMin)]
-        public string CompanyRegistrationNumber { get; set; }
+        public string? CompanyRegistrationNumber { get; set; }
 
         [Required]
         [EmailAddress]
