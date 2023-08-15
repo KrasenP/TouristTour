@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using TouristToursAppWeb.Data;
 using TouristToursAppWeb.Data.Models;
+using TouristToursAppWeb.Service.Data.Interfaces;
+using TouristToursAppWeb.Web.Infrastructure;
 
 namespace TouristToursAppWeb
 {
@@ -30,6 +32,8 @@ namespace TouristToursAppWeb
              .AddEntityFrameworkStores<TouristToursAppWebDbContext>();
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddApplicationServices(typeof(IUserGuideService));
+
             // MongoDB  
             var mongoConnectionString = builder.Configuration.GetConnectionString("MongoDbConnection");
             var mongoClient = new MongoClient(mongoConnectionString);
@@ -46,7 +50,7 @@ namespace TouristToursAppWeb
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
                 app.UseHsts();
             }
 

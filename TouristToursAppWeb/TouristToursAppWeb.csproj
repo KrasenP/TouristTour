@@ -18,8 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TouristToursAppWeb.Common\TouristToursAppWeb.Common.csproj" />
     <ProjectReference Include="..\TouristToursAppWeb.Data\TouristToursAppWeb.Data.csproj" />
+    <ProjectReference Include="..\TouristToursAppWeb.Service.Data\TouristToursAppWeb.Service.Data.csproj" />
     <ProjectReference Include="..\TouristToursAppWeb.Web.Infrastructure\TouristToursAppWeb.Web.Infrastructure.csproj" />
+    <ProjectReference Include="..\TouristToursAppWeb.Web.ViewModel\TouristToursAppWeb.Web.ViewModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>

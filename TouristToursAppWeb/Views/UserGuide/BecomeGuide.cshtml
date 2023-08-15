@@ -1,0 +1,68 @@
+﻿
+@model BecomeUserGuideFormVIewModel
+@{
+    ViewBag.Title = "Become tourist guide";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+
+            <div class="form-group mb-3">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="John Doe guide">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="LegalFirmName"></label>
+                <input asp-for="LegalFirmName" class="form-control" placeholder="Best Tour Trip Eood">
+                <span asp-validation-for="LegalFirmName" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="ValueAddedTaxIdentificationNumber"></label>
+                <input asp-for="ValueAddedTaxIdentificationNumber" class="form-control" placeholder="Value added tax identification number">
+                <span asp-validation-for="ValueAddedTaxIdentificationNumber" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CompanyRegistrationNumber"></label>
+                <input asp-for="CompanyRegistrationNumber" class="form-control" placeholder="Company Registration Number">
+                <span asp-validation-for="CompanyRegistrationNumber" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="RegisteredAddress"></label>
+                <input asp-for="RegisteredAddress" class="form-control" placeholder="Registered Address">
+                <span asp-validation-for="RegisteredAddress" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" placeholder="company@email.com">
+                <span asp-validation-for="Email" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="AboutTheActivityProvider"></label>
+                <input asp-for="AboutTheActivityProvider" class="form-control" placeholder="About The Activity Provider">
+                <span asp-validation-for="AboutTheActivityProvider" class="small text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-outline-success" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+

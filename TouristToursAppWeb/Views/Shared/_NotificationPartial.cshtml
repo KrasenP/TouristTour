@@ -1,0 +1,29 @@
+﻿﻿@using static TouristToursAppWeb.Common.NotificationMessage;
+
+
+@if (TempData[TouristToursAppWeb.Common.NotificationMessage.ErrorMassage] != null)
+{
+    <script>
+        $(function () { toastr.error('@TempData[TouristToursAppWeb.Common.NotificationMessage.ErrorMassage].ToString()'); });
+    </script>
+}
+
+@if (TempData[TouristToursAppWeb.Common.NotificationMessage.WarningMassage] != null)
+{
+    <script>
+        $(function () { toastr.warning('@TempData[TouristToursAppWeb.Common.NotificationMessage.WarningMassage].ToString()'); });
+    </script>
+}
+
+@if (TempData[TouristToursAppWeb.Common.NotificationMessage.SuccessMassage] != null)
+{
+    <script>
+        $(function () { toastr.success('@TempData[TouristToursAppWeb.Common.NotificationMessage.SuccessMassage].ToString()'); });
+    </script>
+}
+@if (TempData[TouristToursAppWeb.Common.NotificationMessage.InformationMassage] != null)
+{
+    <script>
+        $(function () { toastr.success('@TempData[TouristToursAppWeb.Common.NotificationMessage.InformationMassage].ToString()'); });
+    </script>
+}
