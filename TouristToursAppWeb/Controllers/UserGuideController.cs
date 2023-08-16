@@ -36,6 +36,7 @@ namespace TouristToursAppWeb.Controllers
             var userId = this.User.GetCurrentUserId();
             if (ModelState.IsValid == false)
             {
+               
                 return View(viewModel);
             }
 
