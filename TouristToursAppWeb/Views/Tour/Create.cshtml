@@ -1,0 +1,154 @@
+﻿@model TourCreateViewModel
+
+<!-- Styles -->
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+    }
+
+    .form-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-header {
+        text-align: center;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 15px;
+        margin-bottom: 25px;
+        color: #007bff;
+    }
+
+    .form-control {
+        border: 2px solid #e0e0e0;
+        border-radius: 5px;
+        padding: 10px 15px;
+        transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 16px;
+        letter-spacing: 1px;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+
+    
+
+</style>
+
+
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <div class="form-container">
+
+            <div class="form-header">
+                <h3>Create a Tour</h3>
+            </div>
+            <form asp-controller="Tour" asp-action="Create" method="post" class="p-4">
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" placeholder="Title...">
+                    <span asp-validation-for="Title" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Duaration"></label>
+                    <input asp-for="Duaration" class="form-control"
+                           placeholder="Duaration of the trip">
+                    <span asp-validation-for="Duaration" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="MeetingPoint"></label>
+                    <input asp-for="MeetingPoint" class="form-control"
+                           placeholder="Set url or write address of place where  starting expedition">
+                    <span asp-validation-for="MeetingPoint" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ImportInformation"></label>
+                    <input asp-for="ImportInformation" class="form-control"
+                           placeholder="important information for tourists that they should know">
+                    <span asp-validation-for="ImportInformation" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LocationCountry"></label>
+                    <input asp-for="LocationCountry" class="form-control"
+                           placeholder="Country ​​where the tourist tour takes place">
+                    <span asp-validation-for="LocationCountry" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LocationCity"></label>
+                    <input asp-for="LocationCity" class="form-control"
+                           placeholder="City ​​where the tourist tour takes place">
+                    <span asp-validation-for="LocationCity" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PricePerPerson">Price Per Person</label>
+                    <input asp-for="PricePerPerson" class="form-control">
+                    <span asp-validation-for="PricePerPerson" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CategoryId"></label>
+                    <select asp-for="CategoryId" class="form-control">
+                        @foreach (var category in Model.Categories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="CategoryId" class="small text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="FullDescription">FullDescription</label>
+                    <textarea asp-for="FullDescription" class="form-control" rows="5" placeholder="Full description for tour... "></textarea>
+                    <span asp-validation-for="FullDescription" class="small text-danger"></span>
+                </div>
+
+                <div class="text-center">
+                    <input class="btn btn-primary mt-3 w-50" type="submit" value="Create Tour" />
+                </div>
+            </form>
+        </div>
+    </div> 
+</div>
+
+<script>
+    const inputs = document.querySelectorAll('.form-control');
+    for (const input of inputs) {
+        input.addEventListener('focus', function() {
+            this.closest('.form-group').querySelector('label').style.fontWeight = 'bold';
+            this.closest('.form-group').querySelector('label').style.color = '#007bff';
+        });
+
+        input.addEventListener('blur', function() {
+            this.closest('.form-group').querySelector('label').style.fontWeight = 'normal';
+            this.closest('.form-group').querySelector('label').style.color = 'black';
+        });
+    }
+</script>

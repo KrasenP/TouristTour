@@ -13,3 +13,4 @@ namespace TouristToursAppWeb.Web.ViewModel
         public string Name { get; set; } = null!;
     }
 }
+ 

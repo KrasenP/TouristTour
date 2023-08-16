@@ -55,10 +55,6 @@ namespace TouristToursAppWeb.Web.ViewModel
         [Display(Name = "Location Country")]
         public string LocationCountry { get; set; }
 
-        [MaxLength(LocationPlaceMaxLength)]
-        [MinLength(LocationPlaceMinLength)]
-        [Display(Name = "Location village")]
-        public string LocationVillage { get; set; }
 
 
         public int CategoryId { get; set; }
