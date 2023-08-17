@@ -30,6 +30,22 @@ namespace TouristToursAppWeb.Service.Data
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<UserGuideInfoVIewModel> TakeUserGuide(string userId)
+        {
+            UserGuide? apU = await _dbContext.UserGuides.Where(x => x.GuideId.ToString() == userId)             
+                .FirstOrDefaultAsync();
+
+            UserGuideInfoVIewModel userGuideInfoVIewModel = new UserGuideInfoVIewModel()
+            {
+                Id = apU.Id,
+                Name = apU.Name,
+                LegalFirmName = apU.LegalFirmName,
+                Email = apU.Email
+            };
+
+            return userGuideInfoVIewModel;
+        }
+
         public async Task<bool> UserGuideByUserId(string userId)
         {
             UserGuide? apU = await _dbContext.UserGuides.Where(x => x.GuideId.ToString() == userId).FirstOrDefaultAsync();
@@ -55,5 +71,7 @@ namespace TouristToursAppWeb.Service.Data
 
             return isExistSameFirmName;
         }
+
+      
     }
 }

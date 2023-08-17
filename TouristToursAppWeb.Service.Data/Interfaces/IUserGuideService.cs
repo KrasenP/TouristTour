@@ -16,5 +16,7 @@ namespace TouristToursAppWeb.Service.Data.Interfaces
         Task<bool> UserGuideExistByLegalFirmName(string legalFirmName);
 
         Task<bool> UserGuideExistByEmail(string email);
+
+        Task<UserGuideInfoVIewModel> TakeUserGuide(string userId);
     }
 }
