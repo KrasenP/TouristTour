@@ -10,5 +10,9 @@ namespace TouristToursAppWeb.Service.Data.Interfaces
    public interface ITourService
     {
         Task CreateTour(TourCreateViewModel viewModel, Guid userGuideId, int locationId);
+
+        Task<TourDetailsViewModel> GetTourById(Guid tourId);
+
+
     }
 }
