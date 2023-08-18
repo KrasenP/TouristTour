@@ -1,6 +1,6 @@
 ﻿@model TourDetailsViewModel
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta3/css/bootstrap.min.css">
+
 
 <style>
     * {
@@ -27,6 +27,7 @@
         border-radius: 50%;
         background-color: rgba(0, 0, 0, 0.6);
         transition: background-color 0.3s ease;
+        text-decoration:none
     }
 
     .prev {
@@ -79,19 +80,18 @@
 </style>
 
 <div class="container mt-5">
-    <!-- Tour Title -->
+
     <div class="text-center mb-5">
         <h2>@Model.Title</h2>
     </div>
 
-    <!-- Images -->
     @if (Model.Images != null && Model.Images.Count > 0)
     {
         <div class="position-relative">
             @for (var i = 0; i < Model.Images.Count; i++)
             {
                 <div class="mySlides">
-                    <div class="numbertext">@i + 1 / @Model.Images.Count</div>
+                    <div class="numbertext">@i / @Model.Images.Count</div>
                     <img src="@Url.Action("GetImage", "Tour", new { fileName = Model.Images[i].FileName })" style="width:100%; max-height: 500px;">
                 </div>
             }
@@ -111,13 +111,14 @@
         <div class="alert alert-warning">No images available for this tour.</div>
     }
 
-    <!-- Tour Details -->
+
     <div class="row mt-5">
         <div class="col-lg-6">
             <h4>Details</h4>
             <p><strong>Duration:</strong> @Model.Duration</p>
             <p><strong>Price Per Person:</strong> @Model.PricePerPerson.ToString("C2")</p>
             <p><strong>Category:</strong> @Model.Category</p>
+            <p><strong>Location:</strong> @Model.Location</p>
             <p><strong>Location:</strong> @Model.Location</p>
         </div>
         <div class="col-lg-6">
@@ -126,7 +127,7 @@
         </div>
     </div>
 
-    <!-- Add Image Form -->
+
     <div class="row mt-5">
         <div class="col-lg-12">
             <h4>Add a new image:</h4>
