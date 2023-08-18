@@ -1,68 +1,178 @@
 ﻿@model TourDetailsViewModel
 
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta3/css/bootstrap.min.css">
 
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .mySlides {
+        display: none;
+    }
+
+    .cursor {
+        cursor: pointer;
+    }
+
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 40%;
+        width: auto;
+        padding: 8px;
+        margin-top: -25px;
+        color: white;
+        font-size: 24px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.6);
+        transition: background-color 0.3s ease;
+    }
+
+    .prev {
+        left: 10px;
+    }
+
+    .next {
+        right: 10px;
+    }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+    .numbertext {
+        color: #f2f2f2;
+        font-size: 14px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+    }
+
+    .column {
+        float: left;
+        width: 16.66%;
+        padding: 5px;
+    }
+
+    .demo {
+        opacity: 0.6;
+        transition: opacity 0.3s ease;
+    }
+
+        .demo:hover, .active {
+            opacity: 1;
+        }
+
+
+    .btn-primary {
+        background-color: #007BFF;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+</style>
+
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
+    <!-- Tour Title -->
+    <div class="text-center mb-5">
+        <h2>@Model.Title</h2>
+    </div>
 
-            <h2 class="text-center mb-4">@Model.Title</h2>
+    <!-- Images -->
+    @if (Model.Images != null && Model.Images.Count > 0)
+    {
+        <div class="position-relative">
+            @for (var i = 0; i < Model.Images.Count; i++)
+            {
+                <div class="mySlides">
+                    <div class="numbertext">@i + 1 / @Model.Images.Count</div>
+                    <img src="@Url.Action("GetImage", "Tour", new { fileName = Model.Images[i].FileName })" style="width:100%; max-height: 500px;">
+                </div>
+            }
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-            <div class="row mb-4">
-                <div class="col-sm-6">
-                    <p><strong>Duration:</strong> @Model.Duration</p>
-                    <p><strong>Price Per Person:</strong> @Model.PricePerPerson.ToString("C2")</p>
-                </div>
-                <div class="col-sm-6">
-                    <p><strong>Category:</strong> @Model.Category</p>
-                    <p><strong>Location:</strong> @Model.Location</p>
-                </div>
+            <div class="text-center mt-3">
+                @for (var i = 0; i < Model.Images.Count; i++)
+                {
+                    <img class="demo cursor" src="@Url.Action("GetImage", "Tour", new { fileName = Model.Images[i].FileName })" style="width:80px;" onclick="currentSlide(@i + 1)" alt="@Model.Images[i].FileName">
+                }
             </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">No images available for this tour.</div>
+    }
 
-            <p class="text-center mb-4"><strong>Description:</strong> @Model.FullDescription</p>
+    <!-- Tour Details -->
+    <div class="row mt-5">
+        <div class="col-lg-6">
+            <h4>Details</h4>
+            <p><strong>Duration:</strong> @Model.Duration</p>
+            <p><strong>Price Per Person:</strong> @Model.PricePerPerson.ToString("C2")</p>
+            <p><strong>Category:</strong> @Model.Category</p>
+            <p><strong>Location:</strong> @Model.Location</p>
+        </div>
+        <div class="col-lg-6">
+            <h4>Description</h4>
+            <p>@Model.FullDescription</p>
+        </div>
+    </div>
 
-            @if (Model.Images != null && Model.Images.Count > 0)
-            {
-                <h3 class="text-center mb-4">Images:</h3>
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        @for (var i = 0; i < Model.Images.Count; i++)
-                        {
-                            <div class="carousel-item @(i == 0 ? "active" : "")">
-                                <img src="@Url.Action("GetImage", "Tour", new { fileName = Model.Images[i].FileName })" alt="@Model.Images[i].FileName" class="d-block w-100">
-                            </div>
-                        }
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            }
-            else
-            {
-                <p class="text-center text-muted">No images available for this tour.</p>
-            }
-
-            <h4 class="text-center mt-5 mb-4">Add a new image:</h4>
+    <!-- Add Image Form -->
+    <div class="row mt-5">
+        <div class="col-lg-12">
+            <h4>Add a new image:</h4>
             <form method="post" enctype="multipart/form-data" asp-action="AddImageToTour" asp-controller="Tour">
                 <input type="hidden" name="tourId" value="@Model.Id" />
                 <div class="form-group">
-                    <input type="file" name="file" required class="form-control" />
-                </div>
-                <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary">Upload Image</button>
+                    <input type="file" name="file" required class="form-control mb-3" />
+                    <button type="submit" class="btn btn-primary btn-block">Upload Image</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta3/js/bootstrap.min.js"></script>
+
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("demo");
+        let captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        if (captionText) {
+            captionText.innerHTML = dots[slideIndex - 1].alt;
+        }
+    }
+</script>
