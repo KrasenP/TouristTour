@@ -20,6 +20,8 @@ namespace TouristToursAppWeb.Web.ViewModel
 
         public string Location { get; set; }
 
+        public string ImportInformation { get; set; }
+
         public List<TourImageViewModel> Images { get; set; }
     }
 }

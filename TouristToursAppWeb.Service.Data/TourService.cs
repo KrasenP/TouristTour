@@ -36,7 +36,8 @@ namespace TouristToursAppWeb.Service.Data
                 PricePerPerson = tourById.PricePerPerson,
                 FullDescription = tourById.FullDescription,
                 Category = categoryTourName.Name,
-                Location = locationTour.Country + " " + locationTour.City,                
+                Location = locationTour.Country + " " + locationTour.City,
+                ImportInformation = tourById.ImportInformation,
                 Images = tourById.ToursImages.Select(img => new TourImageViewModel()
                 {
                     FileName = img.FileName,
@@ -67,6 +68,7 @@ namespace TouristToursAppWeb.Service.Data
                 CategoryId = viewModel.CategoryId,                
                 FullDescription = viewModel.FullDescription,
                 UserGuideId = userGuideId
+                
             };
 
             await _dbContext.Tours.AddAsync(newTour);
