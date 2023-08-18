@@ -74,9 +74,9 @@ namespace TouristToursAppWeb.Controllers
 
         }
 
-        public async Task<IActionResult> Details(Guid tourId)
+        public async Task<IActionResult> Details(string Id)
         {
-            var tour = await _tourService.GetTourById(tourId);
+            var tour = await _tourService.GetTourById(Id);
             if (tour == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace TouristToursAppWeb.Controllers
         }
     
         [HttpPost]
-        public async Task<IActionResult> AddImageToTour(Guid tourId, IFormFile file)
+        public async Task<IActionResult> AddImageToTour(string tourId, IFormFile file)
         {
             var tour = await _tourService.GetTourById(tourId);
 

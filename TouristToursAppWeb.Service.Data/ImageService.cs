@@ -17,13 +17,13 @@ namespace TouristToursAppWeb.Service.Data
         {
             _dbContext = dbContext;
         }
-        public async Task CreateImage(Guid tourId, string fileName, string extensions)
+        public async Task CreateImage(string tourId, string fileName, string extensions)
         {
             TourImages tourImages = new TourImages()
             {
                 FileName = fileName,
                 Extensions = extensions,
-                TourId = tourId
+                TourId = Guid.Parse(tourId)
             };
 
             await _dbContext.ToursImages.AddAsync(tourImages);

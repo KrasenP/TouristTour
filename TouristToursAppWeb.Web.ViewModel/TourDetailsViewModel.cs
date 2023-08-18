@@ -11,6 +11,15 @@ namespace TouristToursAppWeb.Web.ViewModel
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string Duration { get; set; }
+
+        public decimal PricePerPerson { get; set; }
+
+       public string FullDescription { get; set; }
+
+        public string Category { get; set; }
+
+        public string Location { get; set; }
+
         public List<TourImageViewModel> Images { get; set; }
     }
 }

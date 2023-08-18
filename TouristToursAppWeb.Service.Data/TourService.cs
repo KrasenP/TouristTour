@@ -16,21 +16,28 @@ namespace TouristToursAppWeb.Service.Data
         {
             _dbContext = dbContext;
         }
-        public async Task<TourDetailsViewModel> GetTourById(Guid tourId)
+        public async Task<TourDetailsViewModel> GetTourById(string Id)
         {
-            var tourById = await _dbContext.Tours.Include(x => x.ToursImages).FirstOrDefaultAsync();
+            var tourById = await _dbContext.Tours.Include(i=>i.ToursImages).Where(t => t.Id.ToString() == Id).FirstOrDefaultAsync();
+
+            var categoryTourName = await _dbContext.Categories.Where(x => x.Id == tourById.CategoryId).FirstOrDefaultAsync();
+            var locationTour = await _dbContext.Locations.Where(x => x.Id == tourById.LocationId).FirstOrDefaultAsync();
 
             if (tourById==null)
             {
                 return null;
             }
 
-            var viewModel = new TourDetailsViewModel
+            var viewModel = new TourDetailsViewModel()
             {
                 Id = tourById.Id,
                 Title = tourById.Title,
                 Duration = tourById.Duaration,
-                Images = tourById.ToursImages.Select(img => new TourImageViewModel
+                PricePerPerson = tourById.PricePerPerson,
+                FullDescription = tourById.FullDescription,
+                Category = categoryTourName.Name,
+                Location = locationTour.Country + " " + locationTour.City,                
+                Images = tourById.ToursImages.Select(img => new TourImageViewModel()
                 {
                     FileName = img.FileName,
                     Extensions = img.Extensions
@@ -57,7 +64,7 @@ namespace TouristToursAppWeb.Service.Data
                 ImportInformation = viewModel.ImportInformation,
                 LocationId = locationId,
                 PricePerPerson = viewModel.PricePerPerson,
-                CategoryId = viewModel.CategoryId,
+                CategoryId = viewModel.CategoryId,                
                 FullDescription = viewModel.FullDescription,
                 UserGuideId = userGuideId
             };
