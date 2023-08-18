@@ -113,23 +113,28 @@
 
 
     <div class="row mt-5">
+
         <div class="col-lg-6">
             <h4>Details</h4>
-            <p><strong>Duration:</strong> @Model.Duration</p>
-            <p><strong>Price Per Person:</strong> @Model.PricePerPerson.ToString("C2")</p>
-            <p><strong>Category:</strong> @Model.Category</p>
-            <p><strong>Location:</strong> @Model.Location</p>
-            <p><strong>Import information about:</strong> @Model.ImportInformation</p>
-
-
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Duration:</strong> @Model.Duration</li>
+                <li class="list-group-item"><strong>Price Per Person:</strong> @Model.PricePerPerson.ToString("C2")</li>
+                <li class="list-group-item"><strong>Category:</strong> @Model.Category</li>
+                <li class="list-group-item"><strong>Location:</strong> @Model.Location</li>
+                <li class="list-group-item"><strong>Meeting Point:</strong> @Model.MeetingPoint</li>
+                <li class="list-group-item"><strong>What to bring and know before you go :</strong> @Model.ImportInformation</li>
+            </ul>
         </div>
-        <div class="col-lg-6">
-            <h4>Description</h4>
-            <p>@Model.FullDescription</p>
+        <div class="col-lg-5">
+            <h4>Full description</h4>
+            <p> @Model.FullDescription</p>
         </div>
-    </div>
-    <div class="col-lg-6 d-flex justify-content-end">
-        <a asp-controller="TourBooking" asp-action="BookingForm" asp-route-tourId="@Model.Id" class="btn btn-success">BookTour</a>
+
+      
+
+        <div class="col-lg-1 d-flex align-items-start justify-content-end">
+            <a asp-controller="TourBooking" asp-action="BookingForm" asp-route-tourId="@Model.Id" class="btn btn-success">BookTour</a>
+        </div>
     </div>
 
     <div class="row mt-5">

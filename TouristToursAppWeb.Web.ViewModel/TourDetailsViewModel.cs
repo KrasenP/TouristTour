@@ -22,6 +22,8 @@ namespace TouristToursAppWeb.Web.ViewModel
 
         public string ImportInformation { get; set; }
 
+        public string MeetingPoint { get; set; }
+
         public List<TourImageViewModel> Images { get; set; }
     }
 }

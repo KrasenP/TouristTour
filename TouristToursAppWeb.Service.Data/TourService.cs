@@ -38,6 +38,7 @@ namespace TouristToursAppWeb.Service.Data
                 Category = categoryTourName.Name,
                 Location = locationTour.Country + " " + locationTour.City,
                 ImportInformation = tourById.ImportInformation,
+                MeetingPoint = tourById.MeetingPoint,
                 Images = tourById.ToursImages.Select(img => new TourImageViewModel()
                 {
                     FileName = img.FileName,
