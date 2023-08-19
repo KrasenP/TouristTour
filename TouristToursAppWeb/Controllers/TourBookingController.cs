@@ -5,6 +5,7 @@ namespace TouristToursAppWeb.Controllers
 {
     public class TourBookingController : BaseController
     {
+        [HttpGet]
         public IActionResult MakeBooking()
         {
             var model =  new TourBokingFormViewModel();

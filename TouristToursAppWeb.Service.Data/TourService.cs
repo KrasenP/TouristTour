@@ -77,6 +77,21 @@ namespace TouristToursAppWeb.Service.Data
           
         }
 
-       
+        public async Task<TourDetailsViewModel> GetTourForEdit(string Id)
+        {
+            var getTourFoerEdit = await _dbContext.Tours.Where(x => x.Id.ToString() == Id)
+
+                .Select(t=>new TourDetailsViewModel() 
+                {
+                    Title = t.Title,
+                    Duration = t.Duaration,
+                    FullDescription =t.FullDescription,
+                    MeetingPoint = t.MeetingPoint,
+                    Location = t.Location.Country + " " +t.Location.City,
+                    PricePerPerson=t.PricePerPerson,
+                    Category = t.Category.Name
+                })
+                .FirstOrDefaultAsync();
+        }
     }
 }

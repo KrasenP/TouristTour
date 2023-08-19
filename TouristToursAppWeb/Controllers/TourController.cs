@@ -127,6 +127,13 @@ namespace TouristToursAppWeb.Controllers
             return RedirectToAction("Details", new { id = tourId });
         }
 
+        public async Task<IActionResult> Edit(string Id) 
+        {
+            
+
+            return View();
+        }
+
 
         public async Task<IActionResult> GetImage(string fileName)
         {

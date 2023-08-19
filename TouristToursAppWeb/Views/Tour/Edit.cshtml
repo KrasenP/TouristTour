@@ -1,0 +1,54 @@
+﻿@model TourDetailsViewModel
+
+<h2>Edit Gallery</h2>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="Title">Title</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Duration">Duration</label>
+        <input asp-for="Duration" class="form-control" />
+        <span asp-validation-for="Duration" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Location">Location</label>
+        <textarea asp-for="Location" class="form-control"></textarea>
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Category">Category</label>
+        <textarea asp-for="Category" class="form-control"></textarea>
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PricePerPerson">Price per person</label>
+        <textarea asp-for="PricePerPerson" class="form-control"></textarea>
+        <span asp-validation-for="PricePerPerson" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MeetingPoint">Meeting point</label>
+        <textarea asp-for="MeetingPoint" class="form-control"></textarea>
+        <span asp-validation-for="MeetingPoint" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImportInformation">Import information</label>
+        <textarea asp-for="ImportInformation" class="form-control"></textarea>
+        <span asp-validation-for="ImportInformation" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="FullDescription">FullDescription</label>
+        <textarea asp-for="FullDescription" class="form-control"></textarea>
+        <span asp-validation-for="FullDescription" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
+</form>
+

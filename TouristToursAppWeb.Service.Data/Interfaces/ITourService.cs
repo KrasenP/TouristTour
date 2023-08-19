@@ -13,6 +13,7 @@ namespace TouristToursAppWeb.Service.Data.Interfaces
 
         Task<TourDetailsViewModel> GetTourById(string Id);
 
+        Task<TourDetailsViewModel> GetTourForEdit(string Id);
 
     }
 }
