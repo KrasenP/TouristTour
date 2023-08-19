@@ -1,0 +1,30 @@
+﻿@model TourBokingFormViewModel
+
+<form asp-action="MakeBoking" asp-controller="TourBooking" method="post">
+    <input type="hidden" asp-for="TourId" />
+
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="text" class="form-control" asp-for="Email" />
+    </div>
+
+    <div class="form-group">
+        <label for="PhoneNumber">Phone number</label>
+        <input type="text" class="form-control" asp-for="PhoneNumber" required />
+    </div>
+
+    <div class="form-group">
+        <label for="BookedDate">Date of booking</label>
+        <input type="date" class="form-control" asp-for="BookedDate" required />
+    </div>
+
+    <div class="form-group">
+        <label for="CountOfPeople">Number of Persons</label>
+        <input type="number" class="form-control" asp-for="CountOfPeople" required min="1" />
+    </div>
+
+
+    <div class="form-group mt-4">
+        <button type="submit" class="btn btn-primary">Submit Booking Request</button>
+    </div>
+</form>
