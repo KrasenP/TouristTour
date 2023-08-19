@@ -79,10 +79,14 @@ namespace TouristToursAppWeb.Service.Data
 
         public async Task<TourDetailsViewModel> GetTourForEdit(string Id)
         {
-            var getTourFoerEdit = await _dbContext.Tours.Where(x => x.Id.ToString() == Id)
 
+            var categoryTourName = await _dbContext.Categories.Where(x => x.Tours.Any(y=>y.Id.ToString()==Id)).FirstOrDefaultAsync();
+            var locationTour = await _dbContext.Locations.Where(x => x.Tours.Any(y=>y.Id.ToString()==Id)).FirstOrDefaultAsync();
+
+            var getTourFoerEdit = await _dbContext.Tours.Where(x => x.Id.ToString() == Id)
                 .Select(t=>new TourDetailsViewModel() 
                 {
+                    Id = t.Id,
                     Title = t.Title,
                     Duration = t.Duaration,
                     FullDescription =t.FullDescription,
@@ -92,6 +96,8 @@ namespace TouristToursAppWeb.Service.Data
                     Category = t.Category.Name
                 })
                 .FirstOrDefaultAsync();
+
+            return getTourFoerEdit;
         }
     }
 }

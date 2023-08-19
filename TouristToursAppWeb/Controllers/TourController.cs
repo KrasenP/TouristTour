@@ -129,9 +129,16 @@ namespace TouristToursAppWeb.Controllers
 
         public async Task<IActionResult> Edit(string Id) 
         {
-            
+            var model = await _tourService.GetTourForEdit(Id);
 
-            return View();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(TourDetailsViewModel viewModel)
+        {
+
+
+            return RedirectToAction("Index", "Home"); 
         }
 
 
