@@ -13,9 +13,9 @@ namespace TouristToursAppWeb.Service.Data.Interfaces
 
         Task<TourDetailsViewModel> GetTourById(string Id);
 
-        Task<TourDetailsViewModel> GetTourForEdit(string Id);
+        Task<TourCreateViewModel> GetTourForEdit(string Id);
 
-        Task EditTour(TourDetailsViewModel tourDetailsView);
+        Task EditTour(TourCreateViewModel tourDetailsView);
 
     }
 }

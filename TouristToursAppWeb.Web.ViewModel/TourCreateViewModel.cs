@@ -13,6 +13,8 @@ namespace TouristToursAppWeb.Web.ViewModel
 
         }
 
+        public Guid Id { get; set; }
+
         [Required]
         [MaxLength(TourTitleMaxLength)]
         [MinLength(TourTitleMinLength)]

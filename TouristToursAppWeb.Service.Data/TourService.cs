@@ -77,50 +77,41 @@ namespace TouristToursAppWeb.Service.Data
           
         }
 
-        public async Task<TourDetailsViewModel> GetTourForEdit(string Id)
+        public async Task<TourCreateViewModel> GetTourForEdit(string Id)
         {
 
             var categoryTourName = await _dbContext.Categories.Where(x => x.Tours.Any(y=>y.Id.ToString()==Id)).FirstOrDefaultAsync();
             var locationTour = await _dbContext.Locations.Where(x => x.Tours.Any(y=>y.Id.ToString()==Id)).FirstOrDefaultAsync();
 
             var getTourFoerEdit = await _dbContext.Tours.Where(x => x.Id.ToString() == Id)
-                .Select(t=>new TourDetailsViewModel() 
+                .Select(t=>new TourCreateViewModel() 
                 {
                     Id = t.Id,
                     Title = t.Title,
-                    Duration = t.Duaration,
+                    Duaration = t.Duaration,
                     FullDescription =t.FullDescription,
                     MeetingPoint = t.MeetingPoint,
-                    Location = t.Location.Country + " " +t.Location.City,
+                    LocationCity = locationTour.City,
+                    LocationCountry = locationTour.Country,
                     PricePerPerson=t.PricePerPerson,
-                    Category = t.Category.Name
+                    CategoryId = t.CategoryId
                 })
                 .FirstOrDefaultAsync();
 
             return getTourFoerEdit;
         }
 
-        public async Task EditTour(TourDetailsViewModel tourDetailsView)
+        public async Task EditTour(TourCreateViewModel tourDetailsView)
         {
             var getTour = await _dbContext.Tours.Where(x => x.Id == tourDetailsView.Id ).FirstOrDefaultAsync();
 
-            string[] splitedInput = tourDetailsView.Location.Split(" ", StringSplitOptions.RemoveEmptyEntries).ToArray(); 
-
-            var getLocationTour = _dbContext.Locations.Any()
-
-            if (getTour == null)
-            {
-                throw new InvalidOperationException("There is no tour with this data");
-            }
-
-           
-
             
-
+                               
             getTour.Title = tourDetailsView.Title;
-            getTour.Duaration = tourDetailsView.Duration;
-            getTour.
-
+            getTour.Duaration = tourDetailsView.Duaration;
+            getTour.PricePerPerson = tourDetailsView.PricePerPerson;
+            
+            
 
 
 
