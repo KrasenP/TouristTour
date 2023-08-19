@@ -21,16 +21,19 @@
         <textarea asp-for="Location" class="form-control"></textarea>
         <span asp-validation-for="Location" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label asp-for="Category">Category</label>
         <textarea asp-for="Category" class="form-control"></textarea>
         <span asp-validation-for="Category" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label asp-for="PricePerPerson">Price per person</label>
-        <textarea asp-for="PricePerPerson" class="form-control"></textarea>
+        <input asp-for="PricePerPerson" type="number" step="0.01" class="form-control" />
         <span asp-validation-for="PricePerPerson" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label asp-for="MeetingPoint">Meeting point</label>
         <textarea asp-for="MeetingPoint" class="form-control"></textarea>

@@ -99,5 +99,31 @@ namespace TouristToursAppWeb.Service.Data
 
             return getTourFoerEdit;
         }
+
+        public async Task EditTour(TourDetailsViewModel tourDetailsView)
+        {
+            var getTour = await _dbContext.Tours.Where(x => x.Id == tourDetailsView.Id ).FirstOrDefaultAsync();
+
+            string[] splitedInput = tourDetailsView.Location.Split(" ", StringSplitOptions.RemoveEmptyEntries).ToArray(); 
+
+            var getLocationTour = _dbContext.Locations.Any()
+
+            if (getTour == null)
+            {
+                throw new InvalidOperationException("There is no tour with this data");
+            }
+
+           
+
+            
+
+            getTour.Title = tourDetailsView.Title;
+            getTour.Duaration = tourDetailsView.Duration;
+            getTour.
+
+
+
+
+        }
     }
 }
