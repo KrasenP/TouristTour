@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TouristToursAppWeb.Data.Models\TouristToursAppWeb.Data.Models.csproj" />
     <ProjectReference Include="..\TouristToursAppWeb.Data\TouristToursAppWeb.Data.csproj" />
     <ProjectReference Include="..\TouristToursAppWeb.Web.Infrastructure\TouristToursAppWeb.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\TouristToursAppWeb.Web.ViewModel\TouristToursAppWeb.Web.ViewModel.csproj" />

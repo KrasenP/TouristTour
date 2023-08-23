@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TouristToursAppWeb.Data.Models;
 using TouristToursAppWeb.Web.ViewModel;
 
 namespace TouristToursAppWeb.Service.Data.Interfaces
@@ -15,7 +16,7 @@ namespace TouristToursAppWeb.Service.Data.Interfaces
 
         Task<TourCreateViewModel> GetTourForEdit(string Id);
 
-        Task EditTour(TourCreateViewModel tourDetailsView);
+        Task EditTour(TourCreateViewModel tour,Location newLocation);
 
     }
 }

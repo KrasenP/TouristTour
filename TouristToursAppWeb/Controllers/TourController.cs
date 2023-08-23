@@ -130,13 +130,17 @@ namespace TouristToursAppWeb.Controllers
         public async Task<IActionResult> Edit(string Id) 
         {
             var model = await _tourService.GetTourForEdit(Id);
+            
 
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(TourDetailsViewModel viewModel)
+        public async Task<IActionResult> Edit(TourCreateViewModel viewModel)
         {
 
+            var getTourLocation = await _locationService.LocationManager(viewModel.LocationCountry, viewModel.LocationCity);
+            var getNewLocation = await _locationService.getNewLocation(getTourLocation);
+            await _tourService.EditTour(viewModel,getNewLocation);
 
 
             return RedirectToAction("Index", "Home"); 

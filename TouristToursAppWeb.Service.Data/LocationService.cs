@@ -14,6 +14,13 @@ namespace TouristToursAppWeb.Service.Data
         {
             _touristToursAppWebDbContext=touristToursAppWebDbContext;
         }
+
+        public async Task<Location> getNewLocation(LocationViewModel newLocation)
+        {
+            return await _touristToursAppWebDbContext.Locations.Where(x => x.Id == newLocation.Id).FirstOrDefaultAsync();
+            
+        }
+
         public async Task<LocationViewModel?> LocationManager(string country, string city)
         {
             LocationViewModel? getExistLocation = await _touristToursAppWebDbContext.Locations.Where(l => l.Country == country && l.City == city)

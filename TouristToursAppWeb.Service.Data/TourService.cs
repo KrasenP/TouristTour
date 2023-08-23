@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Security.Cryptography.X509Certificates;
 using TouristToursAppWeb.Data;
 using TouristToursAppWeb.Data.Models;
 using TouristToursAppWeb.Service.Data.Interfaces;
@@ -80,7 +81,12 @@ namespace TouristToursAppWeb.Service.Data
         public async Task<TourCreateViewModel> GetTourForEdit(string Id)
         {
 
-            var categoryTourName = await _dbContext.Categories.Where(x => x.Tours.Any(y=>y.Id.ToString()==Id)).FirstOrDefaultAsync();
+            var categoryTourName = await _dbContext.Categories.Where(x => x.Tours.Any(y=>y.Id.ToString()==Id))
+                .Select(x=> new CategoryFromViewModel() 
+                {
+                    Name = x.Name
+                })
+                .ToListAsync();
             var locationTour = await _dbContext.Locations.Where(x => x.Tours.Any(y=>y.Id.ToString()==Id)).FirstOrDefaultAsync();
 
             var getTourFoerEdit = await _dbContext.Tours.Where(x => x.Id.ToString() == Id)
@@ -94,22 +100,28 @@ namespace TouristToursAppWeb.Service.Data
                     LocationCity = locationTour.City,
                     LocationCountry = locationTour.Country,
                     PricePerPerson=t.PricePerPerson,
-                    CategoryId = t.CategoryId
+                    Categories = categoryTourName
                 })
                 .FirstOrDefaultAsync();
 
             return getTourFoerEdit;
         }
 
-        public async Task EditTour(TourCreateViewModel tourDetailsView)
+        public async Task EditTour(TourCreateViewModel tour,TouristToursAppWeb.Data.Models.Location location)
         {
-            var getTour = await _dbContext.Tours.Where(x => x.Id == tourDetailsView.Id ).FirstOrDefaultAsync();
+            var getTour = await _dbContext.Tours.Where(x => x.Id == tour.Id ).FirstOrDefaultAsync();
 
-            
+            getTour.Title = tour.Title;
+            getTour.FullDescription = tour.FullDescription;
+            getTour.Duaration = tour.Duaration;
+            getTour.LocationId = location.Id;
+            getTour.Location = location;
+            getTour.PricePerPerson = tour.PricePerPerson;
+
+
+           await _dbContext.SaveChangesAsync();
                                
-            getTour.Title = tourDetailsView.Title;
-            getTour.Duaration = tourDetailsView.Duaration;
-            getTour.PricePerPerson = tourDetailsView.PricePerPerson;
+          
             
             
 

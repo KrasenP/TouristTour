@@ -21,6 +21,11 @@
         <textarea asp-for="LocationCity" class="form-control"></textarea>
         <span asp-validation-for="LocationCity" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="LocationCountry">Country</label>
+        <textarea asp-for="LocationCountry" class="form-control"></textarea>
+        <span asp-validation-for="LocationCountry" class="text-danger"></span>
+    </div>
 
     <div class="form-group">
         <label asp-for="CategoryId"></label>
@@ -30,6 +35,7 @@
                 <option value="@category.Id">@category.Name</option>
             }
         </select>
+
         <span asp-validation-for="CategoryId" class="small text-danger"></span>
     </div>
 
