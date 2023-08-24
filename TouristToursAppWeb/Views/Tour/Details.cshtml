@@ -91,7 +91,7 @@
             @for (var i = 0; i < Model.Images.Count; i++)
             {
                 <div class="mySlides">
-                    <div class="numbertext">@i / @Model.Images.Count</div>
+                    <div class="numbertext">@(i+1) / @Model.Images.Count </div>
                     <img src="@Url.Action("GetImage", "Tour", new { fileName = Model.Images[i].FileName })" style="width:100%; max-height: 500px;">
                 </div>
             }
@@ -123,6 +123,7 @@
                 <li class="list-group-item"><strong>Location:</strong> @Model.Location</li>
                 <li class="list-group-item"><strong>Meeting Point:</strong> @Model.MeetingPoint</li>
                 <li class="list-group-item"><strong>What to bring and know before you go :</strong> @Model.ImportInformation</li>
+                <li class="list-group-item"><strong>Category: </strong> @Model.Category</li>
             </ul>
         </div>
         <div class="col-lg-5">
