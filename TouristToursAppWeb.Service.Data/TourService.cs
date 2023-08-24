@@ -78,15 +78,10 @@ namespace TouristToursAppWeb.Service.Data
           
         }
 
-        public async Task<TourCreateViewModel> GetTourForEdit(string Id)
+        public async Task<TourCreateViewModel> GetTourForEdit(string Id,List<CategoryFromViewModel> categories)
         {
 
-            var categoryTourName = await _dbContext.Categories.Where(x => x.Tours.Any(y=>y.Id.ToString()==Id))
-                .Select(x=> new CategoryFromViewModel() 
-                {
-                    Name = x.Name
-                })
-                .ToListAsync();
+        
             var locationTour = await _dbContext.Locations.Where(x => x.Tours.Any(y=>y.Id.ToString()==Id)).FirstOrDefaultAsync();
 
             var getTourFoerEdit = await _dbContext.Tours.Where(x => x.Id.ToString() == Id)
@@ -100,7 +95,7 @@ namespace TouristToursAppWeb.Service.Data
                     LocationCity = locationTour.City,
                     LocationCountry = locationTour.Country,
                     PricePerPerson=t.PricePerPerson,
-                    Categories = categoryTourName
+                    Categories = categories
                 })
                 .FirstOrDefaultAsync();
 
@@ -118,14 +113,7 @@ namespace TouristToursAppWeb.Service.Data
             getTour.Location = location;
             getTour.PricePerPerson = tour.PricePerPerson;
 
-
            await _dbContext.SaveChangesAsync();
-                               
-          
-            
-            
-
-
 
         }
     }

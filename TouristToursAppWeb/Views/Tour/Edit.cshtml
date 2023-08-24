@@ -68,3 +68,17 @@
     <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
 </form>
 
+<script>
+    const inputs = document.querySelectorAll('.form-control');
+    for (const input of inputs) {
+        input.addEventListener('focus', function() {
+            this.closest('.form-group').querySelector('label').style.fontWeight = 'bold';
+            this.closest('.form-group').querySelector('label').style.color = '#007bff';
+        });
+
+        input.addEventListener('blur', function() {
+            this.closest('.form-group').querySelector('label').style.fontWeight = 'normal';
+            this.closest('.form-group').querySelector('label').style.color = 'black';
+        });
+    }
+</script>

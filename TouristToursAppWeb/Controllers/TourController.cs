@@ -129,7 +129,8 @@ namespace TouristToursAppWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string Id) 
         {
-            var model = await _tourService.GetTourForEdit(Id);
+            var categories = await _categoryService.GetAllCategory();
+            var model = await _tourService.GetTourForEdit(Id,categories);
             
 
             return View(model);
@@ -137,9 +138,12 @@ namespace TouristToursAppWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(TourCreateViewModel viewModel)
         {
-
+            var gategories = _categoryService.GetAllCategory();
+           
             var getTourLocation = await _locationService.LocationManager(viewModel.LocationCountry, viewModel.LocationCity);
             var getNewLocation = await _locationService.getNewLocation(getTourLocation);
+
+            viewModel.Categories = await _categoryService.GetAllCategory();
             await _tourService.EditTour(viewModel,getNewLocation);
 
 

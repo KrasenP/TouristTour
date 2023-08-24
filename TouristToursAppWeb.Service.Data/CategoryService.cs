@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using TouristToursAppWeb.Data;
+using TouristToursAppWeb.Data.Models;
 using TouristToursAppWeb.Service.Data.Interfaces;
 using TouristToursAppWeb.Web.ViewModel;
 
@@ -26,5 +27,7 @@ namespace TouristToursAppWeb.Service.Data
 
             return categories;
         }
+
+     
     }
 }
