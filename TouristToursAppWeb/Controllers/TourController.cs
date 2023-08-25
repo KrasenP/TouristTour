@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
+using TouristToursAppWeb.Data;
 using TouristToursAppWeb.Data.Models;
 using TouristToursAppWeb.Data.Models.MongoDbModel;
 using TouristToursAppWeb.Service.Data.Interfaces;
@@ -21,13 +22,16 @@ namespace TouristToursAppWeb.Controllers
         private readonly IMongoCollection<ImageFile> _imageFileCollection;
         private readonly IWebHostEnvironment _environment;
 
+        private readonly TouristToursAppWebDbContext _dbContext;
+
         
 
         private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif", "PNG" };
 
         public TourController(ICategoryService categoryService,ITourService tourService,
             ILocationService locationService, IUserGuideService userGuideService, 
-            IWebHostEnvironment environment,IImageService imageService,IMongoDatabase mongoDatabase)
+            IWebHostEnvironment environment,IImageService imageService,IMongoDatabase mongoDatabase,
+            TouristToursAppWebDbContext touristToursAppWebDbContext)
         {
             _categoryService = categoryService;
             _tourService = tourService;
@@ -36,6 +40,7 @@ namespace TouristToursAppWeb.Controllers
             _environment = environment;
             _imageService = imageService;
             _imageFileCollection = mongoDatabase.GetCollection<ImageFile>("TouristTourAppMDB");
+            _dbContext = touristToursAppWebDbContext;
 
         }
         
@@ -148,6 +153,24 @@ namespace TouristToursAppWeb.Controllers
 
 
             return RedirectToAction("Index", "Home"); 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DelatePicture(string fileName, Guid tourId) 
+
+        {
+           //var tour = await _dbContext.Tours.Include(x=>x.ToursImages).FirstOrDefaultAsync(x=>x.Id == tourId);
+           // var image = tour.ToursImages.FirstOrDefault(x => x.FileName == fileName);
+
+         
+
+            var imageForDelete = await _dbContext.ToursImages.Where(x => x.FileName == fileName).FirstOrDefaultAsync();
+             _dbContext.ToursImages.Remove(imageForDelete);
+            await _dbContext.SaveChangesAsync();
+
+            var filter = Builders<ImageFile>.Filter.Eq("FileName", fileName);
+            await _imageFileCollection.DeleteOneAsync(filter);
+            return   Content("success");
         }
 
 

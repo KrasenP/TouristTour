@@ -57,7 +57,7 @@ namespace TouristToursAppWeb.Data.Models
 
         public virtual Category Category { get; set; }
 
-        public virtual List<TourImages> ToursImages { get; set; }
+        public  List<TourImages> ToursImages { get; set; }
 
         public virtual List<ToursDatesSet> Dates { get; set; }
 
