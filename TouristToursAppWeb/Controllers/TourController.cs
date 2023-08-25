@@ -8,6 +8,7 @@ using TouristToursAppWeb.Service.Data.Interfaces;
 using TouristToursAppWeb.Web.ViewModel;
 
 using static TouristToursAppWeb.Web.Infrastructure.ClaimPrincipalExtensions;
+using static TouristToursAppWeb.Common.NotificationMessage;
 
 namespace TouristToursAppWeb.Controllers
 {
@@ -82,9 +83,12 @@ namespace TouristToursAppWeb.Controllers
         public async Task<IActionResult> Details(string Id)
         {
             var tour = await _tourService.GetTourById(Id);
+
             if (tour == null)
             {
-                return NotFound();
+
+                TempData[WarningMassage] = "Tour not exist or has been deleted";
+                return RedirectToAction("Index","Home");
             }
            
             return View(tour);
@@ -172,7 +176,28 @@ namespace TouristToursAppWeb.Controllers
             await _imageFileCollection.DeleteOneAsync(filter);
             return   Content("success");
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteTour(string tourId) 
+        {
+            var deletePictures = await _dbContext.ToursImages.Where(x => x.TourId.ToString() == tourId).ToListAsync();
 
+            foreach (var picture in deletePictures)
+            {
+                var mongoDbFilter = Builders<ImageFile>.Filter.Eq("FileName", picture.FileName);
+                await  _imageFileCollection.DeleteOneAsync(mongoDbFilter);
+            }
+
+             _dbContext.ToursImages.RemoveRange(deletePictures);
+
+            var deleteTour = await _dbContext.Tours.Where(x => x.Id.ToString() == tourId).FirstOrDefaultAsync();
+            _dbContext.Tours.Remove(deleteTour);
+
+
+
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction("Index","Home");
+        }
 
         public async Task<IActionResult> GetImage(string fileName)
         {

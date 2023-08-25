@@ -20,6 +20,11 @@ namespace TouristToursAppWeb.Service.Data
         public async Task<TourDetailsViewModel> GetTourById(string Id)
         {
             var tourById = await _dbContext.Tours.Include(i=>i.ToursImages).Where(t => t.Id.ToString() == Id).FirstOrDefaultAsync();
+            if (tourById == null)
+            {
+             
+                return null;
+            }
 
             var categoryTourName = await _dbContext.Categories.Where(x => x.Id == tourById.CategoryId).FirstOrDefaultAsync();
             var locationTour = await _dbContext.Locations.Where(x => x.Id == tourById.LocationId).FirstOrDefaultAsync();
