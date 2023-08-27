@@ -93,6 +93,8 @@
                 <div class="mySlides">
                     <div class="numbertext">@(i+1) / @Model.Images.Count </div>
                     <img src="@Url.Action("GetImage", "Tour", new { fileName = Model.Images[i].FileName })" style="width:100%; max-height: 500px;">
+                 
+                    <button onclick="deleteImage('@Model.Images[i].FileName', '@Model.Id')" class="btn btn-danger delete-button">Delete</button>
                 </div>
             }
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -103,7 +105,7 @@
                 {
                     <img class="demo cursor" src="@Url.Action("GetImage", "Tour", new { fileName = Model.Images[i].FileName })" style="width:80px;" onclick="currentSlide(@i + 1)" alt="@Model.Images[i].FileName">
                     //бутон за тестване
-                    <button onclick="deleteImage('@Model.Images[i].FileName', '@Model.Id')" class="btn btn-danger">Delete</button>
+                    //<button onclick="deleteImage('@Model.Images[i].FileName', '@Model.Id')" class="btn btn-danger">Delete</button>
                 }
             </div>
         </div>
