@@ -52,7 +52,7 @@
 <div class="container">
     <div class="booking-form">
         <h2>Book your tour now</h2>
-        <form asp-action="MakeBoking" asp-controller="TourBooking" method="post">
+        <form asp-action="MakeBooking" asp-controller="TourBooking" method="post">
             <input type="hidden" asp-for="TourId" />
 
             <div class="form-group">
@@ -67,7 +67,7 @@
 
             <div class="form-group">
                 <label for="BookedDate">Date of booking</label>
-                <input type="date" class="form-control" asp-for="BookedDate" required />
+                <input type="date" class="form-control" asp-for="BookedDate" required min="@DateTime.Now.ToString("yyyy-MM-dd")" />
             </div>
 
             <div class="form-group">

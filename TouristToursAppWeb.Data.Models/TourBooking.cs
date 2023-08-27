@@ -16,9 +16,7 @@ namespace TouristToursAppWeb.Data.Models
         [Required]
         public DateTime BookedDate { get; set; }
 
-
         public int CountOfPeople { get; set; }
-
 
         [Required]
         [EmailAddress]
