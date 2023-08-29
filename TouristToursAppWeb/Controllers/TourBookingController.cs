@@ -10,10 +10,12 @@ namespace TouristToursAppWeb.Controllers
     public class TourBookingController : BaseController
     {
         private readonly ITourBookingService _tourBookingService; 
+        private readonly IUserGuideService _userGuideService;
 
-        public TourBookingController(ITourBookingService tourBookingService)
+        public TourBookingController(ITourBookingService tourBookingService,IUserGuideService userGuideService)
         {
             _tourBookingService = tourBookingService;
+            _userGuideService = userGuideService;   
         }
    
         public IActionResult MakeBooking(string tourId)
@@ -40,6 +42,15 @@ namespace TouristToursAppWeb.Controllers
 
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> BookingOnTour(string tourId) 
+        {
+            
+            return RedirectToAction("Index", "Home");
+
+        } 
+
 
 
     }

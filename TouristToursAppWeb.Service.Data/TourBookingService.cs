@@ -23,7 +23,23 @@ namespace TouristToursAppWeb.Service.Data
             _dbContext = touristToursAppWebDbContext;
         }
 
-  
+        public async Task<List<TourBookedViewModel>> GetBookedTours(string tourId)
+        {
+            return await _dbContext.TourBookings.Where(t => t.TourId.ToString() == tourId)
+                .Select(x => new TourBookedViewModel()
+                {
+                    Id = x.Id,
+                    TourName = x.Tour.Title,
+                    BookingUserName = x.AppUser.UserName,
+                    BookingUserPhoneNumber = x.AppUser.PhoneNumber,
+                    Email = x.Email,
+                    CountOfPeople = x.CountOfPeople,
+                    IsBooked = x.IsBooked,
+                    IsRefused = x.IsRefused,
+                    BookedDate = x.BookedDate
+
+                }).ToListAsync();
+        }
 
         public async Task MakeBooking(TourBokingFormViewModel bokingFormViewModel,string currentUserId)
         {

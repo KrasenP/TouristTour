@@ -30,6 +30,18 @@ namespace TouristToursAppWeb.Service.Data
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<UserGuideInfoVIewModel?> GetUserGuideInfo(string userId)
+        {
+            return await _dbContext.UserGuides.Where(x => x.GuideId.ToString() == userId)
+                 .Select(g => new UserGuideInfoVIewModel()
+                 {
+                     Id = g.Id,
+                     Name = g.Name,
+                     Email = g.Email,
+                     LegalFirmName = g.LegalFirmName
+                 }).FirstOrDefaultAsync();
+        }
+
         public async Task<UserGuideInfoVIewModel> TakeUserGuide(string userId)
         {
             UserGuide? apU = await _dbContext.UserGuides.Where(x => x.GuideId.ToString() == userId)             

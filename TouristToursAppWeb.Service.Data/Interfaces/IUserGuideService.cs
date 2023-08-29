@@ -9,6 +9,7 @@ namespace TouristToursAppWeb.Service.Data.Interfaces
 {
     public interface IUserGuideService
     {
+        Task<UserGuideInfoVIewModel> GetUserGuideInfo(string userId);
         Task<bool> UserGuideByUserId(string userId);
 
         Task CreateGuide(string userId, BecomeUserGuideFormVIewModel viewModel);
@@ -18,5 +19,7 @@ namespace TouristToursAppWeb.Service.Data.Interfaces
         Task<bool> UserGuideExistByEmail(string email);
 
         Task<UserGuideInfoVIewModel> TakeUserGuide(string userId);
+
+       
     }
 }
