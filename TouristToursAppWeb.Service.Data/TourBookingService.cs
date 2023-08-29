@@ -25,13 +25,13 @@ namespace TouristToursAppWeb.Service.Data
 
         public async Task<List<TourBookedViewModel>> GetBookedTours(string tourId)
         {
-            return await _dbContext.TourBookings.Where(t => t.TourId.ToString() == tourId)
+           var model = await _dbContext.TourBookings.Where(t => t.TourId.ToString() == tourId)
                 .Select(x => new TourBookedViewModel()
                 {
                     Id = x.Id,
                     TourName = x.Tour.Title,
                     BookingUserName = x.AppUser.UserName,
-                    BookingUserPhoneNumber = x.AppUser.PhoneNumber,
+                    BookingUserPhoneNumber = x.PhoneNumber,
                     Email = x.Email,
                     CountOfPeople = x.CountOfPeople,
                     IsBooked = x.IsBooked,
@@ -39,6 +39,8 @@ namespace TouristToursAppWeb.Service.Data
                     BookedDate = x.BookedDate
 
                 }).ToListAsync();
+
+            return model;
         }
 
         public async Task MakeBooking(TourBokingFormViewModel bokingFormViewModel,string currentUserId)
@@ -51,6 +53,7 @@ namespace TouristToursAppWeb.Service.Data
                 Email = bokingFormViewModel.Email,
                 BookedDate = bokingFormViewModel.BookedDate,
                 TourId = bokingFormViewModel.TourId,
+                CountOfPeople = bokingFormViewModel.CountOfPeople,
                 IsBooked = false,
                 IsRefused = false
                 

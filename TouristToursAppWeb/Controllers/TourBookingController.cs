@@ -43,11 +43,12 @@ namespace TouristToursAppWeb.Controllers
 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> BookingOnTour(string tourId) 
+
+        public async Task<IActionResult> BookingOnTour(string Id) 
         {
-            
-            return RedirectToAction("Index", "Home");
+            var model  = await _tourBookingService.GetBookedTours(Id);
+
+            return View(model);
 
         } 
 
