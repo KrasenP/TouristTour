@@ -18,6 +18,7 @@ namespace TouristToursAppWeb.Service.Data.Interfaces
 
         Task EditTour(TourCreateViewModel tour,Location newLocation);
 
+        Task<AllToursFilteredAndPagedServiceModel> AllAsync(AllTourQueryModel tourAllViewModel);
        
 
     }

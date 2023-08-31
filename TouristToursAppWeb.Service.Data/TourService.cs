@@ -121,5 +121,21 @@ namespace TouristToursAppWeb.Service.Data
            await _dbContext.SaveChangesAsync();
 
         }
+
+        public async Task<AllToursFilteredAndPagedServiceModel> AllAsync(AllTourQueryModel queryModel)
+        {
+            IQueryable<TouristToursAppWeb.Data.Models.Tour> toursQuery =  _dbContext.Tours.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryModel.Category))
+            {
+                toursQuery = toursQuery.Where(x=>x.Category.Name==queryModel.Category);
+            }
+            if (!string.IsNullOrWhiteSpace(queryModel.SerchByString))
+            {
+                string wildCard = $"%{queryModel.SerchByString.ToLower()}%";
+
+                toursQuery = toursQuery.Where(t => EF.Functions.Like(t.Title, wildCard));
+            }
+        }
     }
 }
