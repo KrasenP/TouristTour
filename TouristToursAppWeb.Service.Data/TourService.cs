@@ -6,6 +6,7 @@ using TouristToursAppWeb.Data;
 using TouristToursAppWeb.Data.Models;
 using TouristToursAppWeb.Service.Data.Interfaces;
 using TouristToursAppWeb.Web.ViewModel;
+using TouristToursAppWeb.Web.ViewModel.Enum;
 using static TouristToursAppWeb.Common.EntityValidationConstants;
 
 namespace TouristToursAppWeb.Service.Data
@@ -134,8 +135,37 @@ namespace TouristToursAppWeb.Service.Data
             {
                 string wildCard = $"%{queryModel.SerchByString.ToLower()}%";
 
-                toursQuery = toursQuery.Where(t => EF.Functions.Like(t.Title, wildCard));
+                toursQuery = toursQuery.Where(t => EF.Functions.Like(t.Title, wildCard) ||
+                                                   EF.Functions.Like(t.Duaration, wildCard) ||
+                                                   EF.Functions.Like(t.Location.City, wildCard) ||
+                                                   EF.Functions.Like(t.Location.Country, wildCard));
             }
+
+            toursQuery = queryModel.TourSorting switch
+            {
+                TourSorting.Newest => toursQuery.OrderBy(c=>c.CreatedOn),
+                TourSorting.Oldest => toursQuery.OrderByDescending(c=>c.CreatedOn),
+                TourSorting.PriceAscending=> toursQuery.OrderBy(x=>x.PricePerPerson),
+                TourSorting.PriceDescending=> toursQuery.OrderByDescending(x=>x.PricePerPerson),
+                
+
+            };
+
+            List<TourAllViewModel> allViewModels = await toursQuery.Skip(queryModel.CurrentPage-1*queryModel.TourPerPage)
+                .Take(queryModel.TourPerPage)
+                .Select(t=>new TourAllViewModel() 
+                {
+                    Id = t.Id.ToString(),
+                    Title = t.Title,
+                    Location = $"{t.Location.Country}" + $"{t.Location.City}",
+                    PricePerPerson = t.PricePerPerson,
+                    
+                    
+
+                }).ToListAsync();
+
+            int totalsTour = allViewModels.Count();
+
         }
     }
 }
