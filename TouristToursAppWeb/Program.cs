@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using TouristToursAppWeb.Data;
 using TouristToursAppWeb.Data.Models;
+using TouristToursAppWeb.Service.Data;
 using TouristToursAppWeb.Service.Data.Interfaces;
 using TouristToursAppWeb.Web.Infrastructure;
 
@@ -33,6 +34,7 @@ namespace TouristToursAppWeb
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddApplicationServices(typeof(IUserGuideService));
+            builder.Services.AddApplicationServices(typeof(AllToursFilteredAndPagedServiceModel));
 
             // MongoDB  
             var mongoConnectionString = builder.Configuration.GetConnectionString("MongoDbConnection");
