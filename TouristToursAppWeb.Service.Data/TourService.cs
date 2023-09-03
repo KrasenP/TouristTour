@@ -160,6 +160,7 @@ namespace TouristToursAppWeb.Service.Data
                 .ToListAsync();
             ///страния проблем с Microsoft.Data.SqlClient.SqlException (0x80131904): The offset specified in a OFFSET clause may not be negative. го пшравих като добавих скоби тука :queryModel.CurrentPage - 1  и така вече мога да достъпвам страбицата ALl 
 
+
             List<TourAllViewModel> allTour = await toursQuery.Skip((queryModel.CurrentPage - 1 )* queryModel.TourPerPage)
                 .Take(queryModel.TourPerPage)
                 .Select(t => new TourAllViewModel()
