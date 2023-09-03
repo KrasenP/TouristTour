@@ -15,6 +15,17 @@ namespace TouristToursAppWeb.Service.Data
         {
             _dbContext = dbContext;
         }
+
+        public async Task<List<string>> AllCategoryNameAsync()
+        {
+           List<string> list = await _dbContext
+                .Categories
+                .Select(n=>n.Name)
+                .ToListAsync();
+
+            return list;
+        }
+
         public async Task<List<CategoryFromViewModel>> GetAllCategory()
         {
             List<CategoryFromViewModel> categories = await _dbContext.Categories.AsNoTracking().
@@ -27,6 +38,8 @@ namespace TouristToursAppWeb.Service.Data
 
             return categories;
         }
+
+
 
      
     }

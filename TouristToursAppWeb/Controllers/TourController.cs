@@ -9,6 +9,8 @@ using TouristToursAppWeb.Web.ViewModel;
 
 using static TouristToursAppWeb.Web.Infrastructure.ClaimPrincipalExtensions;
 using static TouristToursAppWeb.Common.NotificationMessage;
+using Microsoft.AspNetCore.Authorization;
+using TouristToursAppWeb.Service.Data;
 
 namespace TouristToursAppWeb.Controllers
 {
@@ -209,6 +211,19 @@ namespace TouristToursAppWeb.Controllers
             }
 
             return File(imageFile.ImageData, $"image/{imageFile.Extensions}");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> All([FromQuery]AllTourQueryModel queryModel) 
+        {
+            AllToursFilteredAndPagedServiceModel serviceModel = await _tourService.AllAsync(queryModel);
+
+            queryModel.Tours = serviceModel.Tours;
+          
+            queryModel.Categories = await _categoryService.AllCategoryNameAsync();
+
+            return View(queryModel);
         }
 
 

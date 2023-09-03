@@ -29,6 +29,8 @@ namespace TouristToursAppWeb.Web.ViewModel
 
         public int TourPerPage { get; set; } = 3;
 
+        public int TourTotal { get; set; }
+
         public List<string> Categories { get; set; }
 
         public List<TourAllViewModel> Tours { get; set; }

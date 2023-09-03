@@ -12,6 +12,7 @@ namespace TouristToursAppWeb.Service.Data.Interfaces
     {
         Task<List<CategoryFromViewModel>> GetAllCategory();
 
+        Task<List<string>> AllCategoryNameAsync();
      
     }
 }

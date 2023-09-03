@@ -13,6 +13,7 @@ namespace TouristToursAppWeb.Service.Data
         {
             this.Tours = new List<TourAllViewModel>();
         }
+
         public int TotalTourCount { get; set; }
 
         public List<TourAllViewModel> Tours { get; set; }

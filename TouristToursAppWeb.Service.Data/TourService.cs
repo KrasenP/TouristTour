@@ -125,7 +125,7 @@ namespace TouristToursAppWeb.Service.Data
 
         public async Task<AllToursFilteredAndPagedServiceModel> AllAsync(AllTourQueryModel queryModel)
         {
-            IQueryable<TouristToursAppWeb.Data.Models.Tour> toursQuery =  _dbContext.Tours.AsQueryable();
+            IQueryable<TouristToursAppWeb.Data.Models.Tour> toursQuery =  this._dbContext.Tours.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.Category))
             {
@@ -151,20 +151,35 @@ namespace TouristToursAppWeb.Service.Data
 
             };
 
-            List<TourAllViewModel> allViewModels = await toursQuery.Skip(queryModel.CurrentPage-1*queryModel.TourPerPage)
+            var anyTourImage = await _dbContext.ToursImages
+                .Select(x=>new TourImageViewModel() 
+                {
+                    FileName = x.FileName,
+                    Extensions = x.Extensions
+                })
+                .ToListAsync();
+
+            List<TourAllViewModel> allViewModels = await toursQuery.Skip(queryModel.CurrentPage - 1 * queryModel.TourPerPage)
                 .Take(queryModel.TourPerPage)
-                .Select(t=>new TourAllViewModel() 
+                .Select(t => new TourAllViewModel()
                 {
                     Id = t.Id.ToString(),
                     Title = t.Title,
+                    TourImage = anyTourImage.FirstOrDefault(),
                     Location = $"{t.Location.Country}" + $"{t.Location.City}",
                     PricePerPerson = t.PricePerPerson,
-                    
-                    
+
+
 
                 }).ToListAsync();
 
             int totalsTour = allViewModels.Count();
+
+            return new AllToursFilteredAndPagedServiceModel()
+            {
+                TotalTourCount = totalsTour,
+                Tours = allViewModels
+            };
 
         }
     }
