@@ -2,7 +2,7 @@
 
 <div class="col-md-4">
     <div class="card mb-3">
-        <img class="card-img-top" src="@Model.TourImage" alt="House Image">
+        <img class="card-img-top" src="@Url.Action("GetImage", "Tour", new { fileName = Model.TourImage.FileName })" alt="House Image">
         <div class="card-body text-center">
             <h4>@Model.Title</h4>
 

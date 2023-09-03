@@ -151,11 +151,13 @@ namespace TouristToursAppWeb.Service.Data
 
             };
 
+            // tova kato go izpolzvah mi vadishe na stranicata all edni i sushti snimki za tova vzimaneto na snimkata e napravo vuv zaqvkata kakto trqbva da e 
             var anyTourImage = await _dbContext.ToursImages
                 .Select(x=>new TourImageViewModel() 
                 {
                     FileName = x.FileName,
-                    Extensions = x.Extensions
+                    Extensions = x.Extensions,
+                    TourId = x.TourId.ToString()
                 })
                 .ToListAsync();
             ///страния проблем с Microsoft.Data.SqlClient.SqlException (0x80131904): The offset specified in a OFFSET clause may not be negative. го пшравих като добавих скоби тука :queryModel.CurrentPage - 1  и така вече мога да достъпвам страбицата ALl 
@@ -167,7 +169,13 @@ namespace TouristToursAppWeb.Service.Data
                 {
                     Id = t.Id.ToString(),
                     Title = t.Title,
-                    TourImage = anyTourImage.FirstOrDefault(),
+                    TourImage = t.ToursImages.Where(i=>i.TourId==t.Id).Select(x=>new TourImageViewModel() 
+                    {
+                        FileName = x.FileName,
+                        Extensions = x.Extensions,
+                        
+
+                    }).FirstOrDefault(),
                     Location = $"{t.Location.Country}" + $"{t.Location.City}",
                     PricePerPerson = t.PricePerPerson,
 
