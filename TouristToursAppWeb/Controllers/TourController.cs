@@ -201,6 +201,8 @@ namespace TouristToursAppWeb.Controllers
             return RedirectToAction("Index","Home");
         }
 
+        // ako nqma tuka allowanonyous to tam kudto ima vizualizaciq na snimka nqma da mojesh da e vidish dokato ne se loginesh 
+        [AllowAnonymous]
         public async Task<IActionResult> GetImage(string fileName)
         {
             var imageFile = await _imageFileCollection.Find(x => x.FileName == fileName).FirstOrDefaultAsync();
