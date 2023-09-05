@@ -25,6 +25,7 @@ namespace TouristToursAppWeb.Service.Data
 
         public async Task<List<TourBookedViewModel>> GetBookedTours(string tourId)
         {
+            string id = tourId;
            var model = await _dbContext.TourBookings.Where(t => t.TourId.ToString() == tourId)
                 .Select(x => new TourBookedViewModel()
                 {

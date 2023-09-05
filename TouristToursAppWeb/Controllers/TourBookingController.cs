@@ -44,9 +44,9 @@ namespace TouristToursAppWeb.Controllers
         }
 
 
-        public async Task<IActionResult> BookingOnTour(string Id) 
+        public async Task<IActionResult> BookingOnTour(string tourId) 
         {
-            var model  = await _tourBookingService.GetBookedTours(Id);
+            var model  = await _tourBookingService.GetBookedTours(tourId);
 
             return View(model);
 
