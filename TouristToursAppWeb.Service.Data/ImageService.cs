@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,14 @@ namespace TouristToursAppWeb.Service.Data
             };
 
             await _dbContext.ToursImages.AddAsync(tourImages);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DelatePicture(string imageFileName)
+        {
+            var imageForDelete = await _dbContext.ToursImages.Where(x => x.FileName == imageFileName).FirstOrDefaultAsync();
+
+            _dbContext.ToursImages.Remove(imageForDelete);
             await _dbContext.SaveChangesAsync();
         }
     }

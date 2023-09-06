@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,16 +11,19 @@ namespace TouristToursAppWeb.Service.Data
 {
     public class TourImageService : ITourImageService
     {
-        private readonly TouristToursAppWebDbContext _dbConntext;
+        private readonly TouristToursAppWebDbContext _dbContext;
         public TourImageService(TouristToursAppWebDbContext touristToursAppWebDbContext)
         {
-            _dbConntext = touristToursAppWebDbContext;
+            _dbContext = touristToursAppWebDbContext;
         }
-        public async Task DelatePicture(string tourId,int imageId)
+        public async Task DelatePicture(string imageFileName)
         {
 
-           
-            throw new NotImplementedException();
+            var imageForDelete = await _dbContext.ToursImages.Where(x => x.FileName == imageFileName).FirstOrDefaultAsync();
+
+            _dbContext.ToursImages.Remove(imageForDelete);
+            await _dbContext.SaveChangesAsync();
+
         }
     }
 }

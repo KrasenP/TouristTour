@@ -8,7 +8,7 @@ namespace TouristToursAppWeb.Service.Data.Interfaces
 {
     public interface ITourImageService
     {
-        public Task DelatePicture(string tourId,int imageId);
+        public Task DelatePicture(string imageFile);
 
     }
 }

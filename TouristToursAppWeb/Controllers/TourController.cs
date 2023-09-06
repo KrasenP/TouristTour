@@ -11,6 +11,7 @@ using static TouristToursAppWeb.Web.Infrastructure.ClaimPrincipalExtensions;
 using static TouristToursAppWeb.Common.NotificationMessage;
 using Microsoft.AspNetCore.Authorization;
 using TouristToursAppWeb.Service.Data;
+using MongoDB.Bson;
 
 namespace TouristToursAppWeb.Controllers
 {
@@ -21,11 +22,16 @@ namespace TouristToursAppWeb.Controllers
         private readonly ILocationService _locationService;
         private readonly IUserGuideService _userGuideService;
         private readonly IImageService _imageService;
+
  
         private readonly IMongoCollection<ImageFile> _imageFileCollection;
         private readonly IWebHostEnvironment _environment;
 
         private readonly TouristToursAppWebDbContext _dbContext;
+      
+        /// <summary>
+        /// TODO remove _dbContext from DeleteTour DeletePicture and add service for operation DeleteTour and DeletePicture
+        /// </summary>
 
         
 
@@ -165,14 +171,17 @@ namespace TouristToursAppWeb.Controllers
         public async Task<IActionResult> DelatePicture(string fileName, Guid tourId) 
 
         {
-           //var tour = await _dbContext.Tours.Include(x=>x.ToursImages).FirstOrDefaultAsync(x=>x.Id == tourId);
-           // var image = tour.ToursImages.FirstOrDefault(x => x.FileName == fileName);
+            //var tour = await _dbContext.Tours.Include(x=>x.ToursImages).FirstOrDefaultAsync(x=>x.Id == tourId);
+            // var image = tour.ToursImages.FirstOrDefault(x => x.FileName == fileName);
 
-         
 
-            var imageForDelete = await _dbContext.ToursImages.Where(x => x.FileName == fileName).FirstOrDefaultAsync();
-             _dbContext.ToursImages.Remove(imageForDelete);
-            await _dbContext.SaveChangesAsync();
+            // add service for this : 
+            //var imageForDelete = await _dbContext.ToursImages.Where(x => x.FileName == fileName).FirstOrDefaultAsync();
+
+            // _dbContext.ToursImages.Remove(imageForDelete);
+            //await _dbContext.SaveChangesAsync();
+
+            await _imageService.DelatePicture(fileName);
 
             var filter = Builders<ImageFile>.Filter.Eq("FileName", fileName);
             await _imageFileCollection.DeleteOneAsync(filter);
@@ -198,7 +207,7 @@ namespace TouristToursAppWeb.Controllers
 
             await _dbContext.SaveChangesAsync();
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("All","Tour");
         }
 
         // ako nqma tuka allowanonyous to tam kudto ima vizualizaciq na snimka nqma da mojesh da e vidish dokato ne se loginesh 
