@@ -75,7 +75,8 @@ namespace TouristToursAppWeb.Service.Data
                 PricePerPerson = viewModel.PricePerPerson,
                 CategoryId = viewModel.CategoryId,                
                 FullDescription = viewModel.FullDescription,
-                UserGuideId = userGuideId
+                UserGuideId = userGuideId,
+                ToursImages = new List<TourImages>()
                 
             };
 
