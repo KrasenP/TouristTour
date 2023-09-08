@@ -47,7 +47,7 @@
     {
         previousPage = 1;
     }
-    var maxPage = Math.Ceiling((double)Model.TourPerPage / Model.TourPerPage   );
+    var maxPage = Math.Ceiling((double)Model.TourPerPage / Model.TourPerPage);
 }
 <div class="row mb-5">
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
@@ -77,11 +77,18 @@ string.Empty)"
 </div>
 @if (!Model.Tours.Any())
 {
-    <h2 class="text-center">No houses found by the given criteria!</h2>
+    <h2 class="text-center">No tours found by the given criteria!</h2>
 }
+
 <div class="row">
+
     @foreach (var house in Model.Tours)
     {
         <partial name="_TourPartial" model="@house" />
     }
+
+
 </div>
+
+
+
