@@ -35,8 +35,7 @@ namespace TouristToursAppWeb.Service.Data
                     BookingUserPhoneNumber = x.PhoneNumber,
                     Email = x.Email,
                     CountOfPeople = x.CountOfPeople,
-                    IsBooked = x.IsBooked,
-                    IsRefused = x.IsRefused,
+                    Actions =x.Actions,
                     BookedDate = x.BookedDate
 
                 }).ToListAsync();
@@ -54,9 +53,8 @@ namespace TouristToursAppWeb.Service.Data
                 Email = bokingFormViewModel.Email,
                 BookedDate = bokingFormViewModel.BookedDate,
                 TourId = bokingFormViewModel.TourId,
-                CountOfPeople = bokingFormViewModel.CountOfPeople,
-                IsBooked = false,
-                IsRefused = false
+                CountOfPeople = bokingFormViewModel.CountOfPeople
+               
                 
             };
 

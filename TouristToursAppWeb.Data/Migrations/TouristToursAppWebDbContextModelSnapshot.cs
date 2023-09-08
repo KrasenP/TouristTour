@@ -312,7 +312,7 @@ namespace TouristToursAppWeb.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 8, 15, 14, 55, 36, 493, DateTimeKind.Utc).AddTicks(8829));
+                        .HasDefaultValue(new DateTime(2023, 9, 8, 14, 26, 41, 611, DateTimeKind.Utc).AddTicks(5050));
 
                     b.Property<string>("Duaration")
                         .IsRequired()
@@ -365,6 +365,9 @@ namespace TouristToursAppWeb.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("Actions")
+                        .HasColumnType("bit");
+
                     b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -377,12 +380,6 @@ namespace TouristToursAppWeb.Data.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsBooked")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsRefused")
-                        .HasColumnType("bit");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()

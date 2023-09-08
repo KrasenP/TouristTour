@@ -27,9 +27,8 @@
                                 <th>Booking user phone number</th>
                                 <th>Email</th>
                                 <th>Count of people</th>
-                                <th>Is Booked</th>
-                                <th>Is Refused</th>
-                                <th>Actions</th>
+                                <th>Accept Or Refuse</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -51,21 +50,15 @@
                                     <td>
                                         <form asp-action="UpdateBookingStatus" asp-controller="TourBooking" method="post">
                                             <input type="hidden" name="Id" value="@item.Id" />
-                                            <button type="submit" name="ActionType" value="ToggleBooked" class="btn btn-sm @(item.IsBooked ? "btn-success" : "btn-secondary")">
-                                                @(item.IsBooked ? "Booked" : "Not Booked")
+                                            <button type="submit" name="ActionType" value="ToggleBooked" class="btn btn-sm @(item.Actions ? "btn-success" : "btn-secondary")">
+                                                @(item.Actions ? "Booked" : "Refused")
                                             </button>
                                         </form>
                                     </td>
+                                    
                                     <td>
-                                        <form asp-action="UpdateBookingStatus" asp-controller="TourBooking" method="post">
-                                            <input type="hidden" name="Id" value="@item.Id" />
-                                            <button type="submit" name="ActionType" value="ToggleRefused" class="btn btn-sm @(item.IsRefused ? "btn-danger" : "btn-secondary")">
-                                                @(item.IsRefused ? "Refused" : "Not Refused")
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <!-- Други действия -->
+
+
                                     </td>
                                 </tr>
                             }

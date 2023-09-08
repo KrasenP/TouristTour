@@ -23,9 +23,7 @@ namespace TouristToursAppWeb.Web.ViewModel
 
         public string BookingUserName { get; set; }
 
-        public bool IsBooked { get; set; }
-
-        public bool IsRefused { get; set; }
+       public bool Actions { get; set; }
 
 
     }

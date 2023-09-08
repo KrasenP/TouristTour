@@ -34,8 +34,7 @@ namespace TouristToursAppWeb.Data.Models
         public Guid? TourId { get; set; }
         public  Tour? Tour { get; set; }
 
-        public bool IsBooked { get; set; }
+        public bool Actions { get; set; }
 
-        public bool IsRefused { get; set; }
     }
 }
