@@ -48,7 +48,7 @@
                                     <td>@item.Email</td>
                                     <td>@item.CountOfPeople</td>
                                     <td>
-                                        <form asp-action="UpdateBookingStatus" asp-controller="TourBooking" method="post">
+                                        <form asp-action="UpdateBookingStatus" asp-controller="TourBooking" asp-route-bookedId="@item.Id" method="post">
                                             <input type="hidden" name="Id" value="@item.Id" />
                                             <button type="submit" name="ActionType" value="ToggleBooked" class="btn btn-sm @(item.Actions ? "btn-success" : "btn-secondary")">
                                                 @(item.Actions ? "Booked" : "Refused")

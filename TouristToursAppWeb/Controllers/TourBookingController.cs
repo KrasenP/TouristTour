@@ -50,8 +50,14 @@ namespace TouristToursAppWeb.Controllers
 
             return View(model);
 
-        } 
+        }
 
+        public async Task<IActionResult> UpdateBookingStatus(string bookedId) 
+        {
+            string booked = bookedId;
+
+            return RedirectToAction("Index", "Home");
+        }
 
 
     }
