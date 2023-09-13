@@ -23,6 +23,11 @@ namespace TouristToursAppWeb.Service.Data
             _dbContext = touristToursAppWebDbContext;
         }
 
+        public Task ChangeStatus(string bookId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<TourBookedViewModel>> GetBookedTours(string tourId)
         {
             string id = tourId;
@@ -63,5 +68,6 @@ namespace TouristToursAppWeb.Service.Data
 
 
         }
+        
     }
 }

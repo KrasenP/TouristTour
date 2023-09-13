@@ -8,5 +8,7 @@ namespace TouristToursAppWeb.Service.Data.Interfaces
         Task MakeBooking(TourBokingFormViewModel bokingFormViewModel,string currentUserId);
 
         Task<List<TourBookedViewModel>> GetBookedTours(string tourId);
+
+        Task ChangeStatus(string bookId);
     }
 }
