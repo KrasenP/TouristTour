@@ -9,6 +9,6 @@ namespace TouristToursAppWeb.Service.Data.Interfaces
 
         Task<List<TourBookedViewModel>> GetBookedTours(string tourId);
 
-        Task ChangeStatus(string bookId);
+        void ChangeStatus(string bookId);
     }
 }

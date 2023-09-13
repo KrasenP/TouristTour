@@ -23,9 +23,21 @@ namespace TouristToursAppWeb.Service.Data
             _dbContext = touristToursAppWebDbContext;
         }
 
-        public Task ChangeStatus(string bookId)
+        public  async void ChangeStatus(string bookId)
         {
-            throw new NotImplementedException();
+           var getTourBook = await _dbContext.TourBookings.Where(x=>x.Id.ToString()==bookId).FirstOrDefaultAsync();
+
+            if (getTourBook.Actions==false)
+            {
+                getTourBook.Actions = true;
+            }
+            else
+            {
+                getTourBook.Actions = false;
+            }
+
+            await _dbContext.SaveChangesAsync();
+
         }
 
         public async Task<List<TourBookedViewModel>> GetBookedTours(string tourId)
